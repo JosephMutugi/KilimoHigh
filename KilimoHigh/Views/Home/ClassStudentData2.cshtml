@@ -1,0 +1,79 @@
+﻿
+
+@model IEnumerable<Student>
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    //ViewBag.Title = "Bank Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ShowTopMenu = true;
+
+}
+
+<div class="row">
+    <div class="panel-body">
+        <table class="table table-data table-condensed table-hover" id="complaints-table">
+            <tr>
+                <th>
+                    Student Id
+                </th>
+                <th>
+                    name
+                </th>
+                <th>
+                    Stream
+                </th>
+                <th>
+                    Guadian Phone
+                </th>
+                <th>
+                    Date Added
+                </th>
+                <th>
+                    Edit
+                </th>
+                <th>
+                    Delete
+                </th>
+
+
+
+
+            </tr>
+
+            @foreach (var item in Model.OrderByDescending(e => e.Id))
+            {
+        <tr style="background-color:green; color:black">
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Fname @item.SecondName @item.SirName
+            </td>
+            <td>
+                @item.ClassStream.StreamName
+            </td>
+            <td>
+                @item.GurdianPhone
+            </td>
+            <td>
+                @item.DateAdded
+            </td>
+            <td>
+                <a class="btn-primary btn-sm" href="@Url.Action("EditStudent", "Home", new { Id = item.Id })"> Edit</a>
+            </td>
+            <td>
+                <a class="btn-danger btn-sm" href="@Url.Action("DeleteStudent", "Home", new { Id = item.Id })"> Delete</a>
+
+            </td>
+
+
+        </tr>
+            }
+
+        </table>
+
+    </div>
+    </div>
+    

@@ -1,0 +1,93 @@
+﻿@model Student
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    ViewBag.Title = "Bank Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ShowTopMenu = true;
+
+}
+
+<div class="row">
+    <div class="panel-body">
+        <form method="post" action="@Url.Action("SaveEditStudentRegister","Home")">
+
+            <div class="col-md-12">
+                <div class="col-md-12">
+
+                    <table>
+
+                        <tr>
+                            <td>
+                                First Name:
+                            </td>
+                            <td>
+                                <input name="Fname" value="@Model.Fname" type="text" required class="text-box margin-top-bottom-2" style="width: 100%" />
+                                <input hidden name="Id" value="@Model.Id" type="text" required class="text-box margin-top-bottom-2" style="width: 100%" />
+
+                            </td>
+                            <td>
+                                Second Name:
+                            </td>
+                            <td>
+                                <input name="SecondName" value="@Model.SecondName"  type="text" required class="text-box margin-top-bottom-2" style="width: 100%" />
+
+                            </td>
+                            <td>
+                                Sir Name:
+                            </td>
+                            <td>
+                                <input name="SirName" value="@Model.SirName" type="text" required class="text-box margin-top-bottom-2" style="width: 100%" />
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                Class Stream:
+                            </td>
+                            <td>
+                                <select name="StreamId" class="text-box margin-top-bottom-2" style="width: 100%" required>
+                                    @{
+                                        StudentRegisterEntities db = new StudentRegisterEntities();
+
+                                    }
+                                    @foreach (var item in db.ClassStreams)
+                                    {
+                                        <option value="@item.Id">@item.StreamName</option>
+                                    }
+                                </select>
+
+
+                            </td>
+                        
+                            <td>
+                                Gurdian Phone
+                            </td>
+                            <td>
+                                <input required name="GurdianPhone" value="@Model.GurdianPhone" type="tel" class="text-box margin-top-bottom-2" style="width: 100%" />
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary bn-sm" value="Save" />
+
+            </div>
+        </form>
+        <div>
+            @{
+                //StudentRegisterEntities db = new StudentRegisterEntities();
+                var data = db.Students.ToList();
+            }
+            @Html.Partial("~/Views/Home/ClassStudentData.cshtml", data)
+        </div>
+    </div>
+</div>

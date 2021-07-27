@@ -1,0 +1,52 @@
+﻿
+
+@model IEnumerable<ClassStream>
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    //ViewBag.Title = "Bank Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ShowTopMenu = true;
+
+}
+
+<div class="row">
+    <div class="panel-body">
+        <table class="table table-data table-condensed table-hover" id="complaints-table">
+            <tr>
+                <th>Stream Id</th>
+                <th>
+                    Stream
+                </th>
+                <th>
+                    Date Added
+                </th>
+
+
+
+
+            </tr>
+
+            @foreach (var item in Model.OrderByDescending(e => e.Id))
+            {
+                <tr style="background-color:green; color:black">
+                    <td>
+                        @item.Id
+                    </td>
+
+                    <td>
+                        @item.StreamName
+                    </td>
+
+                    <td>
+                        @item.DateAdded
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+        </div>
+</div>
